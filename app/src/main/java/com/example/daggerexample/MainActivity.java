@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // using Dagger Singleton
         App.getApp().getCourseShopComponent().inject(this);
+
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         handlers = new MainActivityClickHandlers();
         activityMainBinding.setClickHandlers(handlers);
@@ -72,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivityViewModel = new ViewModelProvider(this, mainActivityViewModelFactory)
                 .get(MainActivityViewModel.class);
-        // using Dagger Singleton
-
-
 
         mainActivityViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
             @Override
